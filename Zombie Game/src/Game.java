@@ -1,5 +1,8 @@
-import java.awt.*;
 import java.awt.Canvas;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.image.BufferStrategy;
+import java.awt.*;
 
 //2D Zombie Survival
 //coded by Thomas Shetler
@@ -19,6 +22,7 @@ public class Game extends Canvas implements Runnable {
 	public Game() {
 		//Constructor
 		new Window(WIDTH, HEIGHT, title, this);
+		start();
 	}
 	
 	private synchronized void start (){
@@ -69,18 +73,32 @@ public class Game extends Canvas implements Runnable {
 				System.out.println("FPS: " + frames + " TICKS: " + updates);
 				frames = 0;
 				updates = 0;
-				//pre-made start up loop made by 
+				//pre-made start up loop made by GML
 			}
 		}
 		stop();
 	}
 	
 	private void tick() {
-		
+		//updates
 	}
 	
 	private void render() {
+		//renders
+		BufferStrategy bs = this.getBufferStrategy();
+		if (bs == null) {
+		this.createBufferStrategy(3);
+		return;
+
+		}
 		
+		Graphics g = bs.getDrawGraphics();
+		
+		//The Meat and Bones of our rendering
+		g.setColor(Color.black);
+		g.fillRect(0, 0, WIDTH, HEIGHT);
+		bs.show();
+		g.dispose();
 	}
 	
 	public static void main(String args[]) {
